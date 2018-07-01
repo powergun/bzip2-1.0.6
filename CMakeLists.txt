@@ -15,6 +15,14 @@ add_library(bz2 STATIC
 target_include_directories(bz2
     PUBLIC
     .)
+target_compile_options(bz2
+    PUBLIC
+    -Wall -Winline -O2 -g -frecord-gcc-switches
+)
+target_compile_definitions(bz2
+    PUBLIC
+    -D_FILE_OFFSET_BITS=64
+)
 
 add_executable(bzip2
     bzip2.c)

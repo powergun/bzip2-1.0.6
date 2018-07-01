@@ -26,17 +26,29 @@ test2() {
     echo "test 2: pass"
 }
 
+test3() {
+    $BZIP2 -3  < $SOURCE_DIR/sample3.ref > $TMPDIR/sample3.rb2
+    cmp $SOURCE_DIR/sample3.bz2 $TMPDIR/sample3.rb2
+    echo "test 3: pass"
+}
 
-#./bzip2 -3  < sample3.ref > sample3.rb2
-#./bzip2 -d  < sample1.bz2 > sample1.tst
-#./bzip2 -d  < sample2.bz2 > sample2.tst
-#./bzip2 -ds < sample3.bz2 > sample3.tst
+test4() {
+    $BZIP2 -d  < $SOURCE_DIR/sample1.bz2 > $TMPDIR/sample1.tst
+    cmp $TMPDIR/sample1.tst $SOURCE_DIR/sample1.ref
+    echo "test 4: pass"
+}
 
+test5() {
+    $BZIP2 -d  < $SOURCE_DIR/sample2.bz2 > $TMPDIR/sample2.tst
+    cmp $TMPDIR/sample2.tst $SOURCE_DIR/sample2.ref
+    echo "test 5: pass"
+}
 
-#cmp sample3.bz2 sample3.rb2
-#cmp sample1.tst sample1.ref
-#cmp sample2.tst sample2.ref
-#cmp sample3.tst sample3.ref
+test6() {
+    $BZIP2 -ds < $SOURCE_DIR/sample3.bz2 > $TMPDIR/sample3.tst
+    cmp $TMPDIR/sample3.tst $SOURCE_DIR/sample3.ref
+    echo "test 6: pass"
+}
 
 tearDown() {
     head -n 4 $SOURCE_DIR/words3
@@ -46,4 +58,8 @@ tearDown() {
 setUp
 test1
 test2
+test3
+test4
+test5
+test6
 tearDown
