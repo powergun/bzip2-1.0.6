@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.8)
 project(bzip2)
 
+enable_testing()
+
 add_library(bz2 STATIC
     blocksort.c
     huffman.c
@@ -19,3 +21,8 @@ add_executable(bzip2
 target_link_libraries(bzip2
     PRIVATE
     bz2)
+
+add_test(NAME "test::bzip2"
+    COMMAND
+    sh ${PROJECT_SOURCE_DIR}/tests/roundtrip.sh $<TARGET_FILE:bzip2>
+    )
