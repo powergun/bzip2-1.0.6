@@ -1,0 +1,7 @@
+.idea
+build
+*.swp
+*~
+*.pyc
+*tar.gz
+cmake-build-debug
